@@ -4,8 +4,27 @@ import React from "react";
 import { useLanguage } from "./LanguageContext";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Instagram, Heart, MessageCircle } from "lucide-react";
+import { Heart, MessageCircle } from "lucide-react";
 
+// Inline SVG for Instagram icon since lucide brand icons might be deprecated
+const InstagramIcon = ({ size = 24, className = "" }: { size?: number; className?: string }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+  </svg>
+);
 const socialPosts = [
   { id: 1, image: "/images/social_1.png", likes: "1.2k", comments: "84", size: "row-span-2 col-span-2 md:col-span-1 md:row-span-2" },
   { id: 2, image: "/images/hero_bg.png", likes: "948", comments: "53", size: "col-span-2 md:col-span-1" },
@@ -25,7 +44,7 @@ export default function SocialWall() {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div>
             <span className="text-xs md:text-sm font-bold text-gold-400 tracking-[0.3em] uppercase font-outfit mb-3 flex items-center gap-2">
-              <Instagram size={14} className="text-gold-400 animate-pulse" />
+              <InstagramIcon size={14} className="text-gold-400 animate-pulse" />
               {t("social.tag")}
             </span>
             <h2 className="text-3xl md:text-5xl font-serif font-bold text-gold-100 font-tajawal">
@@ -39,7 +58,7 @@ export default function SocialWall() {
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-gradient-to-r from-purple-900/20 via-pink-900/20 to-gold-900/20 border border-white/10 text-gold-300 hover:text-[#0e0c0a] hover:bg-gold-400 transition-all duration-500 font-bold text-sm group cursor-pointer shadow-md shrink-0"
           >
-            <Instagram size={16} className="mr-2 group-hover:scale-110 transition-transform" />
+            <InstagramIcon size={16} className="mr-2 group-hover:scale-110 transition-transform" />
             <span className="font-tajawal">{t("social.cta")}</span>
           </a>
         </div>

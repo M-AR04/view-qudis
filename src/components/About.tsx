@@ -2,14 +2,14 @@
 
 import React from "react";
 import { useLanguage } from "./LanguageContext";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { ShieldCheck, Sunrise, HeartHandshake } from "lucide-react";
 import Image from "next/image";
 
 export default function About() {
   const { t, isRTL } = useLanguage();
 
-  const imageBoxVariants = {
+  const imageBoxVariants: Variants = {
     hidden: { opacity: 0, x: isRTL ? 50 : -50 },
     visible: {
       opacity: 1,
@@ -18,7 +18,7 @@ export default function About() {
     },
   };
 
-  const textBoxVariants = {
+  const textBoxVariants: Variants = {
     hidden: { opacity: 0, x: isRTL ? -50 : 50 },
     visible: {
       opacity: 1,

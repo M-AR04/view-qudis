@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useLanguage } from "./LanguageContext";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { Eye, CloudSun, Users2, Wind, Award, ChefHat } from "lucide-react";
 
 export default function Features() {
@@ -41,7 +41,7 @@ export default function Features() {
     },
   ];
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -51,7 +51,7 @@ export default function Features() {
     },
   };
 
-  const cardVariants = {
+  const cardVariants: Variants = {
     hidden: { opacity: 0, scale: 0.95, y: 20 },
     visible: {
       opacity: 1,
