@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-gold-50: #fdfaf2;
+  --color-gold-100: #faf2db;
+  --color-gold-200: #f4e3b3;
+  --color-gold-300: #eacc7f;
+  --color-gold-400: #dfb051;
+  --color-gold-500: #d4922d;
+  --color-gold-600: #bc7924;
+  --color-gold-700: #9a5d1f;
+  --color-gold-800: #7e4b1e;
+  --color-gold-900: #673e1b;
+  --color-gold-950: #3a200d;
+
+  --color-olive-50: #f7f8f6;
+  --color-olive-100: #ebece9;
+  --color-olive-200: #d8dbd2;
+  --color-olive-300: #bac0b2;
+  --color-olive-400: #969f8b;
+  --color-olive-500: #77826a;
+  --color-olive-600: #5d6852;
+  --color-olive-700: #4b5343;
+  --color-olive-800: #3e4437;
+  --color-olive-900: #242820;
+  --color-olive-950: #171a14;
+
+  --color-beige-50: #fbfbf9;
+  --color-beige-100: #f5f2eb;
+  --color-beige-200: #ebe5d4;
+  --color-beige-300: #dbceb2;
+  --color-beige-400: #c6b288;
+
+  --font-sans: var(--font-outfit), var(--font-tajawal), sans-serif;
+  --font-serif: var(--font-playfair), var(--font-amiri), serif;
+}
+
+:root {
+  --background: #0e0c0a;
+  --foreground: #f5f2eb;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0e0c0a;
+}
+::-webkit-scrollbar-thumb {
+  background: #3a200d;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #bc7924;
+}
+
+/* Selection Overlay */
+::selection {
+  background-color: #bc7924;
+  color: #0e0c0a;
+}
+
+/* Cinematic Fade Layer */
+.cinematic-vignette {
+  background: radial-gradient(circle, rgba(0,0,0,0) 40%, rgba(14,12,10,0.8) 100%);
+}
+
+.gold-gradient-text {
+  background: linear-gradient(135deg, #f4e3b3 0%, #dfb051 50%, #bc7924 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-gradient-bg {
+  background: linear-gradient(135deg, #dfb051 0%, #bc7924 100%);
+}
+
+.glass-panel {
+  background: rgba(23, 26, 20, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(212, 146, 45, 0.15);
+}
+
+.glass-panel-light {
+  background: rgba(251, 251, 249, 0.03);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Traditional Pattern Overlay */
+.islamic-pattern {
+  background-image: radial-gradient(#d4922d 0.5px, transparent 0.5px);
+  background-size: 24px 24px;
+  opacity: 0.07;
+}
