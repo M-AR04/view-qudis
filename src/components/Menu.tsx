@@ -3,70 +3,37 @@
 import React, { useState } from "react";
 import { useLanguage } from "./LanguageContext";
 import { motion, AnimatePresence } from "framer-motion";
-import { Flame, UtensilsCrossed, Globe, IceCream, Wind, Sparkles } from "lucide-react";
+import { 
+  Egg, 
+  Salad, 
+  Flame, 
+  Beef, 
+  Utensils, 
+  CupSoda, 
+  Coffee, 
+  IceCream, 
+  Wind, 
+  Plus, 
+  Sparkles 
+} from "lucide-react";
+import { menuData } from "../lib/menuData";
 
-interface MenuItem {
-  id: string;
-  nameEn: string;
-  nameAr: string;
-  descEn?: string;
-  descAr?: string;
-  price: string;
-  isPopular?: boolean;
-}
-
-const menuData: Record<string, MenuItem[]> = {
-  heritage: [
-    { id: "h1", nameEn: "Traditional Mansaf (Meat)", nameAr: "منسف لحم بلدي تقليدي", descEn: "Slow cooked local meat in fermented jameed, served on turmeric rice and shrak bread with roasted pine nuts.", descAr: "لحم بلدي مطهو بالجميد الكركي، يقدم فوق الأرز البلدي وخبز الشراك مع الصنوبر واللوز المقلي.", price: "14.50", isPopular: true },
-    { id: "h2", nameEn: "Mansaf Chicken", nameAr: "منسف دجاج", descEn: "Roasted tender half chicken in rich jameed yogurt sauce.", descAr: "نصف دجاجة محمرة ومطبوخة بمرق الجميد الغني والمذاق الأصيل.", price: "8.50" },
-    { id: "h3", nameEn: "Baked Ouzi", nameAr: "أوزي صرر", descEn: "Spiced rice mixed with peas, nuts, and meat, baked inside delicate puff pastry.", descAr: "أرز متبل مع البازلاء والمكسرات واللحم المفروم، يخبز داخل عجينة الباف اللذيذة.", price: "9.00" },
-    { id: "h4", nameEn: "Freekeh with Roasted Meat", nameAr: "فريكه باللحم المحمر", descEn: "Green cracked wheat slow-simmered and topped with spiced slow-roasted meat.", descAr: "فريكه خضراء مطهوة ببطء، تعلوها قطع اللحم المحمر والمتبل بالمكسرات.", price: "11.00" },
-    { id: "h5", nameEn: "Meat Sajia", nameAr: "صاجية لحم بلدي", descEn: "Sizzling pan of tender lamb strips cooked with onions, colored peppers, and special spices.", descAr: "مقلاة ساخنة من قطع لحم الخروف البلدي مع البصل والفلفل الملون والبهارات الخاصة.", price: "12.50", isPopular: true },
-    { id: "h6", nameEn: "Chicken Fakhara", nameAr: "فخارة دجاج بالفرن", descEn: "Slow roasted spiced chicken chunks inside an earthen pot with potatoes.", descAr: "قطع الدجاج المتبلة والمطهوة داخل فخارة فخارية بالفرن مع البطاطا والخضار.", price: "8.00" },
-    { id: "h7", nameEn: "Zinger Fakhara", nameAr: "فخارة زنجر بالجبنة", descEn: "Crispy zinger chicken baked with liquid cheddar cheese and special cream sauce.", descAr: "قطع زنجر مقرمشة مطبوخة بجبن التشيدر السائل والكريمة داخل الفخارة.", price: "7.50" },
-  ],
-  grill: [
-    { id: "g1", nameEn: "Mixed Grills Plateau", nameAr: "مشكل مشاوي فاخر", descEn: "Elegant selection of Kebab, Shish Tawook, and Shaff meat skewers.", descAr: "تشكيلة ملكية من أسياخ الكباب البلدي والشيش طاووق والشقف المشوية على الفحم.", price: "13.00", isPopular: true },
-    { id: "g2", nameEn: "Kebab Halabi", nameAr: "كباب حلبي", descEn: "Ground lamb with parsley, garlic, and tomatoes grilled over hot coals.", descAr: "كباب لحم بلدي مفروم مع البقدونس والثوم، يقدم مع صلصة الطماطم المشوية.", price: "10.50" },
-    { id: "g3", nameEn: "Shish Tawook", nameAr: "شيش طاووق", descEn: "Marinated chicken breast cubes grilled to perfection, served with garlic dip.", descAr: "مكعبات صدور الدجاج المتبلة بخلطتنا الخاصة والمشوية، تقدم مع كريم الثوم.", price: "8.50" },
-    { id: "g4", nameEn: "Lamb Shaff Skewers", nameAr: "شقف لحم خروف", descEn: "Tender lamb cubes marinated and grilled over charcoal embers.", descAr: "قطع لحم خروف طرية متبلة ومشوية بإتقان على جمر الفحم.", price: "12.00" },
-    { id: "g5", nameEn: "Kofta Trays (Tahini/Tomato)", nameAr: "صواني كفتة (طحينية أو بندورة)", descEn: "Baked minced meat tray layered with your choice of rich tahini or tangy tomato sauce.", descAr: "صينية لحم مفروم مخبوزة بالفرن مع اختيارك من الطحينية الغنية أو صلصة البندورة.", price: "9.00" },
-    { id: "g6", nameEn: "Eggplant Manzalah", nameAr: "منزلة باذنجان", descEn: "Layered baked eggplant with minced spiced meat and fresh tomato sauce.", descAr: "طبقات الباذنجان المخبوز مع اللحم المفروم المتبل وصلصة الطماطم الطازجة.", price: "7.50" },
-  ],
-  intl: [
-    { id: "i1", nameEn: "Italian Lasagna", nameAr: "لازانيا إيطالية", descEn: "Layers of pasta sheet, beef bolognese, and creamy bechamel, baked with mozzarella.", descAr: "طبقات من الباستا، لحم البولونيز، البشاميل الكريمي، ومخبوزة بجبنة الموزاريلا.", price: "8.00" },
-    { id: "i2", nameEn: "Fettuccine Alfredo Chicken", nameAr: "فيتوتشيني ألفريدو بالدجاج", descEn: "Fettuccine pasta tossed in creamy parmesan alfredo sauce with chicken and mushrooms.", descAr: "مكرونة فيتوتشيني بصلصة الفريدو الكريمية مع جبن البارميزان، الدجاج والفطر.", price: "8.50", isPopular: true },
-    { id: "i3", nameEn: "Spaghetti Bolognese", nameAr: "سباغيتي بولونيز", descEn: "Classic spaghetti with slow-simmered minced beef sauce and herbs.", descAr: "السباغيتي الكلاسيكية مع صلصة اللحم المفروم المطهوة ببطء مع الأعشاب الإيطالية.", price: "7.00" },
-    { id: "i4", nameEn: "Golden Zinger Meals", nameAr: "وجبات زنجر ذهبية", descEn: "Spicy, crispy chicken breast fillet, served with golden fries and coleslaw.", descAr: "صدر دجاج حار ومقرمش، يقدم مع البطاطا الذهبية وسلطة الملفوف.", price: "6.50" },
-    { id: "i5", nameEn: "Chicken Tenders Platter", nameAr: "طبق تشيكن تندرز مقرمش", descEn: "Crisp breaded chicken breast strips served with honey mustard dipping.", descAr: "شرائح صدور الدجاج المقرمشة تقدم مع صوص العسل والخردل المميز.", price: "6.00" },
-    { id: "i6", nameEn: "Kids Meal Mini Burger", nameAr: "وجبات أطفال (ميني برغر)", descEn: "Kid-friendly beef slider or nuggets, served with juice box and fries.", descAr: "برغر لحم صغير أو ناجتس يناسب الأطفال، يقدم مع علبة عصير وبطاطا.", price: "4.50" },
-  ],
-  sweet: [
-    { id: "s1", nameEn: "Royal Kunafa", nameAr: "كنافة نابلسية ملوكية", descEn: "Crunchy pastry melted with Nabulsi cheese and sweetened with warm blossom syrup.", descAr: "كنافة مقرمشة بالجبنة النابلسية المذابة والمحلاة بالقطر الدافئ وماء الزهر.", price: "4.50", isPopular: true },
-    { id: "s2", nameEn: "Traditional Um Ali", nameAr: "أم علي بالمكسرات", descEn: "Warm bread pudding rich in condensed milk, nuts, coconut, and heavy cream.", descAr: "حلوى رقائق الخبز الدافئة بالحليب والمكسرات وجوز الهند والقشطة الطازجة.", price: "5.00" },
-    { id: "s3", nameEn: "Salti Shaba'niyat", nameAr: "شعبانيات سلطية أصلية", descEn: "Authentic traditional local Salti sweet pastry filled with fresh cream and nuts.", descAr: "الحلويات الشعبية السلطية التقليدية المحشوة بالقشطة والمكسرات والقطر.", price: "4.00" },
-    { id: "s4", nameEn: "San Sebastian Cheesecake", nameAr: "سان سباستيان تشيز كيك", descEn: "Burnt crustless creamy cheesecake topped with warm Belgian milk chocolate.", descAr: "تشيز كيك محروق كريمي القوام، يغرق بصلصة الشوكولاتة البلجيكية الدافئة.", price: "5.50", isPopular: true },
-    { id: "s5", nameEn: "Premium Waffles & Crepes", nameAr: "وافل وكريب فاخر", descEn: "Fresh made to order with your choice of Nutella, Pistachio, or fruits.", descAr: "يحضر طازجاً حسب الطلب مع النوتيلا، صوص الفستق الحلبي أو الفواكه الطازجة.", price: "5.50" },
-    { id: "s6", nameEn: "Signature Red Velvet Milkshake", nameAr: "ريد فيلفت ميلك شيك", descEn: "Creamy shake blended with actual red velvet cake crumbles and cream cheese whip.", descAr: "ميلك شيك كريمي مخفوق مع فتات كعكة الريد فيلفت وتغطية كريمة الجبنة.", price: "4.50" },
-  ],
-  shisha: [
-    { id: "sh1", nameEn: "Two Apples Nakhlah", nameAr: "شيشة تفاحتين فاخر (نخلة)", descEn: "Classic, timeless rich tobacco blend for traditional connoisseurs.", descAr: "النكهة الكلاسيكية الغنية التي يعشقها المتذوقون التقليديون.", price: "6.00", isPopular: true },
-    { id: "sh2", nameEn: "Lemon Mint Refresher", nameAr: "شيشة ليمون ونعناع منعش", descEn: "Cooling and crisp summer blend providing absolute fresh smoke.", descAr: "مزيج منعش وبارد يوفر سحبة دخان غنية بالحيوية.", price: "6.00" },
-    { id: "sh3", nameEn: "Blueberry Mist Extra", nameAr: "شيشة بلوبيري (توت بري)", descEn: "Sweet, aromatic blueberry flavor with a touch of ice cool.", descAr: "نكهة التوت البري العطرية والحلوة مع لمسة من البرودة الخفيفة.", price: "7.00" },
-    { id: "sh4", nameEn: "View Alquds Special Blend", nameAr: "شيشة خلطة طلة القدس الخاصة", descEn: "Our signature master blend combining secret fruits and pure mint coolness.", descAr: "خلطتنا الحصرية والسرية التي تجمع بين الفواكه الاستوائية وبرودة النعناع.", price: "8.50", isPopular: true },
-  ],
-};
 
 export default function Menu() {
   const { t, language, isRTL } = useLanguage();
-  const [activeTab, setActiveTab] = useState<string>("heritage");
+  const [activeTab, setActiveTab] = useState<string>("breakfast");
 
   const categories = [
-    { id: "heritage", label: t("menu.categories.heritage"), icon: <UtensilsCrossed size={18} /> },
-    { id: "grill", label: t("menu.categories.grill"), icon: <Flame size={18} /> },
-    { id: "intl", label: t("menu.categories.intl"), icon: <Globe size={18} /> },
-    { id: "sweet", label: t("menu.categories.sweet"), icon: <IceCream size={18} /> },
+    { id: "breakfast", label: t("menu.categories.breakfast"), icon: <Egg size={18} /> },
+    { id: "coldAppetizers", label: t("menu.categories.coldAppetizers"), icon: <Salad size={18} /> },
+    { id: "hotAppetizers", label: t("menu.categories.hotAppetizers"), icon: <Utensils size={18} /> },
+    { id: "grills", label: t("menu.categories.grills"), icon: <Flame size={18} /> },
+    { id: "mains", label: t("menu.categories.mains"), icon: <Beef size={18} /> },
+    { id: "coldDrinks", label: t("menu.categories.coldDrinks"), icon: <CupSoda size={18} /> },
+    { id: "hotDrinks", label: t("menu.categories.hotDrinks"), icon: <Coffee size={18} /> },
+    { id: "desserts", label: t("menu.categories.desserts"), icon: <IceCream size={18} /> },
     { id: "shisha", label: t("menu.categories.shisha"), icon: <Wind size={18} /> },
+    { id: "addons", label: t("menu.categories.addons"), icon: <Plus size={18} /> },
   ];
 
   return (
@@ -87,7 +54,7 @@ export default function Menu() {
         </div>
 
         {/* Sticky category tabs wrapper */}
-        <div className="flex justify-start md:justify-center overflow-x-auto pb-6 mb-12 no-scrollbar -mx-6 px-6 md:mx-0 md:px-0 gap-3 md:gap-4">
+        <div className="flex justify-start lg:justify-center overflow-x-auto pb-6 mb-12 no-scrollbar -mx-6 px-6 lg:mx-0 lg:px-0 gap-3 md:gap-4">
           {categories.map((cat) => {
             const active = activeTab === cat.id;
             return (
