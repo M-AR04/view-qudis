@@ -77,9 +77,9 @@ const translations = {
       },
       family: {
         name: "Family Gathering Package",
-        desc: "The ultimate weekend lunch feast. Includes shared jumbo platters of Mansaf or Ouzi, endless appetizers, and unlimited Arabic coffee.",
+        desc: "The ultimate weekend lunch feast. Includes shared jumbo platters of succulent Mixed Grills (Kebab & Tawook), endless appetizers, and unlimited Arabic coffee.",
         price: "JOD 120",
-        items: ["Large Shared Main Platter", "10+ Heritage Appetizers", "Seasonal Fresh Fruits", "Bottomless Arabic Coffee & Tea"],
+        items: ["Jumbo Mixed Grill Platter", "10+ Traditional Cold Appetizers", "Seasonal Fresh Fruits", "Bottomless Arabic Coffee & Tea"],
       },
       breakfast: {
         name: "Breakfast of the Elite (فطور الرواق)",
@@ -211,9 +211,9 @@ const translations = {
       },
       family: {
         name: "باقة اللمة العائلية 👨👩👧",
-        desc: "وليمة الغداء المثالية لنهاية الأسبوع. تشمل مناسف أو أوزي عملاقة للمشاركة، مقبلات لا تنتهي، وقهوة عربية مفتوحة.",
+        desc: "وليمة الغداء المثالية لنهاية الأسبوع. تشمل صواني وسدور مشاوي مشكلة فاخرة للمشاركة، مقبلات لا تنتهي، وقهوة عربية مفتوحة.",
         price: "120 د.أ",
-        items: ["سدر رئيسي كبير للمشاركة", "أكثر من 10 مقبلات تراثية", "فواكه موسمية طازجة", "قهوة وشاي لا محدود"],
+        items: ["سدر مشاوي مشكلة عملاق للمشاركة", "أكثر من 10 مقبلات منوعة", "فواكه موسمية طازجة", "قهوة وشاي لا محدود"],
       },
       breakfast: {
         name: "فطور الرواق (للأكابر) 🍳",

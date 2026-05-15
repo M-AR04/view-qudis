@@ -49,7 +49,7 @@ export default function About() {
             {/* Main Image */}
             <div className="relative w-[85%] h-[90%] rounded-2xl overflow-hidden border border-gold-400/20 shadow-[0_20px_50px_rgba(0,0,0,0.6)] z-10">
               <Image
-                src="/images/mansaf.png"
+                src="/images/grills.png"
                 alt="Luxury traditional dining"
                 fill
                 className="object-cover"

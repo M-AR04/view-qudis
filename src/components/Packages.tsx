@@ -46,7 +46,7 @@ export default function Packages() {
       name: t("packages.family.name"),
       desc: t("packages.family.desc"),
       price: t("packages.family.price"),
-      image: "/images/mansaf.png",
+      image: "/images/grills.png",
       items: t("packages.family.items"),
       groupSize: "5 - 10",
       accentColor: "from-amber-900/60",
